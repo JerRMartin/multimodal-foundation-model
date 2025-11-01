@@ -37,7 +37,7 @@ python -m src.main
 python src/main.py
 ```
 
-## Notes for Windows native (PowerShell / CMD)
+### Notes for Windows native (PowerShell / CMD)
 
 - The above instructions assume you are running inside WSL. If you prefer to run natively on Windows (PowerShell), create and activate a venv with:
 
