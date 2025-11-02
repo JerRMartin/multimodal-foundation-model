@@ -4,6 +4,21 @@ The goal of this project is to use foundation models from [huggingface](https://
 
 Additionally, to take this refined output and convert it to audio descriptions using a pre-trained tts model. 
 
+## Project Tooling
+### [Transformers](https://huggingface.co/docs/transformers/installation#python)
+We are using the `transformers` python package to import a foundation model.
+
+#### [BLIP: Bootstrapping Language-Image Pre-training](https://huggingface.co/Salesforce/blip-image-captioning-base)
+
+`Salesforce blip-image-captioning-base` = foundation model we import.
+
+### [Datasets](https://huggingface.co/docs/datasets/index)
+
+### [PEFT (Parameter-Efficient Fine-Tuning)](https://github.com/huggingface/peft)
+
+### [Accelerate](https://huggingface.co/docs/accelerate/index)
+
+
 ## Running the Project
 ### 1. Create a virtual environment named `.venv` (safe local name) and activate it.
 

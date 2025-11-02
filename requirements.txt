@@ -1,1 +1,16 @@
+# Python testing framework 
+# TODO: may be removed later
 pytest>=7.0
+
+# PyTorch (GPU with CUDA 12.6)
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch>=2.3.0
+torchvision>=0.18.0
+
+# Core Hugging Face ecosystem
+transformers>=4.44.0
+datasets>=3.0.0
+accelerate>=0.33.0
+huggingface_hub>=0.24.0
+evaluate>=0.4.2
+peft>=0.12.0

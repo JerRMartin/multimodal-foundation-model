@@ -1,14 +1,11 @@
 """Main module for the src package."""
-from __future__ import annotations
+from transformers import BlipProcessor, BlipForConditionalGeneration
+from PIL import Image
 
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
-def greet(name: str = "World") -> str:
-    return f"Hello, {name}!"
-
-
-def main() -> None:
-    print(greet())
-
-
-if __name__ == "__main__":
-    main()
+image = Image.open("example.jpg")
+inputs = processor(images=image, return_tensors="pt")
+out = model.generate(**inputs)
+print(processor.decode(out[0], skip_special_tokens=True))
