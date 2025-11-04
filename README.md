@@ -4,6 +4,41 @@ The goal of this project is to use foundation models from [huggingface](https://
 
 Additionally, to take this refined output and convert it to audio descriptions using a pre-trained tts model. 
 
+## System Requirements
+### CUDA Runtime
+This project requires CUDA `12.8` or newer.
+
+Make sure your installed NVIDIA driver supports at least CUDA `12.8`; otherwise, PyTorch may not detect your GPU.
+
+#### Checking your Version
+You can check this with the following conole command — look for the *“CUDA Version”* field. 
+
+```bash
+nvidia-smi
+```
+
+Example Output: *(Note the CUDA Version in the top-right)*
+```bash
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.65                 Driver Version: 577.03         CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4060 ...    On  |   00000000:01:00.0 Off |                  N/A |
+| N/A   48C    P8              3W /  120W |     162MiB /   8188MiB |      3%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
+```
+
 ## Project Tooling
 ### [Transformers](https://huggingface.co/docs/transformers/installation#python)
 We are using the `transformers` python package to import a foundation model.

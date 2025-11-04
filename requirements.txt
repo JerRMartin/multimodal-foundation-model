@@ -1,9 +1,10 @@
 # Python testing framework 
 # TODO: may be removed later
 pytest>=7.0
+pillow>=12.0.0
 
 # PyTorch (GPU with CUDA 12.6)
---extra-index-url https://download.pytorch.org/whl/cu126
+--extra-index-url https://download.pytorch.org/whl/cu128
 torch>=2.3.0
 torchvision>=0.18.0
 
