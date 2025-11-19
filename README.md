@@ -65,6 +65,8 @@ source .venv/bin/activate
 Notes:
 - If `python3` isn't available, try `python`. Check the Python version with `python --version`.
 
+- For this Project it is recommended to use `3.11.*` as many dependencies require this version. 
+
 ### 2. Install the project requirements.
 
 ```bash
