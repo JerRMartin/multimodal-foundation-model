@@ -1,7 +1,8 @@
 import cv2
 import src.configs as C
-from helpers import count_oscillations, show_delay
+from src.helpers import count_oscillations, show_delay
 from collections import deque
+import pygame
 
 # --------- State ----------
 xs = deque(maxlen=C.WINDOW_SIZE)
@@ -22,6 +23,9 @@ if not cap.isOpened():
 
 print("[o] Running head movement detection. Press 'q' to quit.")
 
+# Initialize mixer ONCE before webcam loop (this esnures no delays on sound playback) 
+pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
+pygame.mixer.init()
 
 while True:
     ret, frame = cap.read()
@@ -69,10 +73,11 @@ while True:
             # Vertical → nod
             if dy > C.NOD_THRESHOLD and dy > dx and osc_y >= C.MIN_OSCILLATIONS and nod_delay == C.DETECT_DELAY:
                 detected_gestures.add("NOD")
+                pygame.mixer.Sound(C.NOD_WAV).play()
             # Horizontal → shake
             elif dx > C.SHAKE_THRESHOLD and dx > dy and osc_x >= C.MIN_OSCILLATIONS and shake_delay == C.DETECT_DELAY:
                 detected_gestures.add("SHAKE")
-
+                pygame.mixer.Sound(C.SHAKE_WAV).play()
 
     # Show status
     cv2.putText(

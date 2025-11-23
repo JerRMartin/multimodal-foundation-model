@@ -2,6 +2,7 @@ import cv2
 import math
 import numpy as np
 import src.configs as C
+import threading
 
 # --------- Helpers ----------
 def count_oscillations(signal):
@@ -62,3 +63,6 @@ def get_box(fl, w, h):
     (endX, endY) = (min(w - 1, endX), min(h - 1, endY))
     
     return startX, startY, endX, endY
+
+def play_sound(sound):
+    threading.Thread(target=sound.play, daemon=True).start()

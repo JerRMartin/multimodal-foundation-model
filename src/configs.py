@@ -1,5 +1,6 @@
 # configs.py
 import cv2
+import simpleaudio as sa
 
 DICT_EMO = {
     0: 'Neutral', 
@@ -28,9 +29,13 @@ DETECT_DELAY = 100        # seconds to wait after a detection
 
 # --------- Configuration Thresholds ----------
 WINDOW_SIZE = 15          # regarding frames in history
-NOD_THRESHOLD = 5        # regarding vertical movement in pixels
-SHAKE_THRESHOLD = 5      # regarding horizontal movement in pixels
-MIN_OSCILLATIONS = 3      # how many direction changes to call a gesture
+NOD_THRESHOLD = 15        # regarding vertical movement in pixels
+SHAKE_THRESHOLD = 15      # regarding horizontal movement in pixels
+MIN_OSCILLATIONS = 2      # how many direction changes to call a gesture
 
 # ---- PyTorch Model Path ----
 PYTORCH_MODEL_PATH = 'models/torchscript_model_0_66_49_wo_gl.pth'
+
+# --------- Audio Objects ----------
+NOD_WAV = 'audio/Villager_Nod.wav'
+SHAKE_WAV = 'audio/Villager_Shake.wav'
