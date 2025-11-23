@@ -1,7 +1,7 @@
 import cv2
 import math
 import numpy as np
-import configs as C
+import src.configs as C
 
 # --------- Helpers ----------
 def count_oscillations(signal):
