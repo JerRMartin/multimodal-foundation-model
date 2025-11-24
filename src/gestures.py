@@ -4,6 +4,7 @@ from src.helpers import count_oscillations, show_delay
 from collections import deque
 import pygame
 from src.xbox_controller import XboxController
+import os
 
 # --------- State ----------
 xs = deque(maxlen=C.WINDOW_SIZE)
@@ -27,7 +28,8 @@ pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
 pygame.mixer.init()
 
 # Initialize Xbox Controller for Haptic Feedback
-controller = XboxController(0)
+if os.getenv("CONTROL", "0").strip() == "True":
+    controller = XboxController(0)
 
 while True:
     ret, frame = cap.read()
@@ -35,7 +37,8 @@ while True:
         break
 
     # Xbox Controller Polling
-    controller.poll()
+    if os.getenv("CONTROL", "0").strip() == "True":
+        controller.poll()
 
     # Flip for natural webcam view
     frame = cv2.flip(frame, 1)
@@ -57,7 +60,8 @@ while True:
         status_text = "Detecting Gaze..."
         status_color = C.COLORS["YELLOW"]
         # Xbox Controller Rumble while face detected
-        controller.rumble(C.LEFT_VIBE, C.RIGHT_VIBE)
+        if os.getenv("CONTROL", "0").strip() == "True":
+            controller.rumble(C.LEFT_VIBE, C.RIGHT_VIBE, duration=0.01)
         
         (x, y, w, h) = faces[0]
         cx = x + w // 2

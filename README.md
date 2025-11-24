@@ -81,19 +81,13 @@ python -m pytest -q
 
 Expected output is that tests pass (exit code 0) and you see a brief pytest summary.
 
-### 4. Run the package entrypoint.
-
-```bash
-python -m src.main
-# OR
-python src/main.py
-```
+---
 
 ### Notes for Windows native (PowerShell / CMD)
 
 - The above instructions assume you are running inside WSL. If you prefer to run natively on Windows (PowerShell), create and activate a venv with:
 
-PowerShell:
+#### PowerShell:
 
 ```powershell
 python -m venv .venv
@@ -102,13 +96,26 @@ pip install -r requirements.txt
 python -m pytest -q
 ```
 
-CMD:
+#### CMD:
 
 ```cmd
 python -m venv .venv
 .\.venv\Scripts\activate.bat
 pip install -r requirements.txt
 python -m pytest -q
+```
+
+## Running the Gesture Recognition
+
+```bash
+set CONTROL=False && python -m src.gestures
+```
+> Note the `CONTROL` environment variable, set this to `True` if you are using an Xbox Controller for Haptic Feedback.
+
+## Running the Emotion  Recognition
+
+```bash
+python -m src.emotions
 ```
 
 ## License
