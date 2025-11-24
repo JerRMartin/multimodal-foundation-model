@@ -33,11 +33,11 @@ def pth_processing(fp):
         return img
     return get_img_torch(fp)
 
-def display_EMO_PRED(img, box, label='', color=C.COLOR_GRAY, txt_color=C.COLOR_WHITE, line_width=2, ):
+def display_EMO_PRED(img, box, label='', color=C.COLORS["GRAY"], txt_color=C.COLORS["WHITE"], line_width=2, ):
     lw = line_width or max(round(sum(img.shape) / 2 * 0.003), 2)
 
     p1, p2 = (int(box[0]), int(box[1])), (int(box[2]), int(box[3]))
-    cv2.rectangle(img, p1, p2, C.COLOR_PURPLE, thickness=lw, lineType=cv2.LINE_AA)
+    cv2.rectangle(img, p1, p2, C.COLORS["PURPLE"], thickness=lw, lineType=cv2.LINE_AA)
 
     ft = max(lw - 1, 1)
     text_width_2, text_height_2 = cv2.getTextSize(label, C.FONT_TYPE, lw / 3, ft)
@@ -46,10 +46,10 @@ def display_EMO_PRED(img, box, label='', color=C.COLOR_GRAY, txt_color=C.COLOR_W
 
     cv2.putText(img, label,
                 (center_face - round(text_width_2 / 2), p1[1] - round(((p2[0] - p1[0]) * 20) / 360)), C.FONT_TYPE,
-                lw / 3, C.COLOR_BLACK, thickness=ft, lineType=cv2.LINE_AA)
+                lw / 3, C.COLORS["BLACK"], thickness=ft, lineType=cv2.LINE_AA)
     cv2.putText(img, label,
                 (center_face - round(text_width_2 / 2), p1[1] - round(((p2[0] - p1[0]) * 20) / 360)), C.FONT_TYPE,
-                lw / 3, C.COLOR_PURPLE, thickness=ft, lineType=cv2.LINE_AA)
+                lw / 3, C.COLORS["PURPLE"], thickness=ft, lineType=cv2.LINE_AA)
     return img
 
 def display_FPS(img, text, margin=1.0, box_scale=1.0):
@@ -77,7 +77,7 @@ def display_FPS(img, text, margin=1.0, box_scale=1.0):
                      0 + margin_n + t_h + int(2 * t_h * box_scale) // 2),
                 fontFace=C.FONT_TYPE,
                 fontScale=font_scale,
-                color=C.COLOR_BLACK,
+                color=C.COLORS["BLACK"],
                 thickness=thickness,
                 lineType=cv2.LINE_AA,
                 bottomLeftOrigin=False)

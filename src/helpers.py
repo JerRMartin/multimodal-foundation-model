@@ -34,7 +34,7 @@ def show_delay(frame, text, delay, position):
         position,
         C.FONT_TYPE,
         1,
-        C.COLOR_GREEN,
+        C.COLORS["GREEN"],
         2,
         cv2.LINE_AA,
     )

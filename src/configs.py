@@ -12,20 +12,23 @@ DICT_EMO = {
     6: 'Anger'
 }
 # ---- Colors ----
-COLOR_RED = (0, 0, 255)
-COLOR_YELLOW = (0, 255, 255)
-COLOR_GREEN = (0, 255, 0)
-COLOR_BLUE = (255, 0, 0)
-COLOR_GRAY = (128, 128, 128)
-COLOR_WHITE = (255, 255, 255)
-COLOR_PURPLE = (255, 0, 255)
-COLOR_BLACK = (0, 0, 0)
+COLORS = {
+    'RED': (0, 0, 255),
+    'YELLOW': (0, 255, 255),
+    'GREEN': (0, 255, 0),
+    'BLUE': (255, 0, 0),
+    'GRAY': (128, 128, 128),
+    'WHITE': (255, 255, 255),
+    'PURPLE': (255, 0, 255),
+    'BLACK': (0, 0, 0),
+}
 
 # ---- Typeface ----
 FONT_TYPE = cv2.FONT_HERSHEY_SIMPLEX
 
 # --------- Constants ----------
-DETECT_DELAY = 100        # seconds to wait after a detection
+DETECT_DELAY = 100        # seconds to wait AFTER a gesture detection
+GAZE_DELAY = 15           # seconds to wait BEFORE detecting gestures
 
 # --------- Configuration Thresholds ----------
 WINDOW_SIZE = 15          # regarding frames in history
@@ -39,3 +42,7 @@ PYTORCH_MODEL_PATH = 'models/torchscript_model_0_66_49_wo_gl.pth'
 # --------- Audio Objects ----------
 NOD_WAV = 'audio/Villager_Nod.wav'
 SHAKE_WAV = 'audio/Villager_Shake.wav'
+
+# ------- Controller Constants -------
+LEFT_VIBE = 0.25
+RIGHT_VIBE = 0.20

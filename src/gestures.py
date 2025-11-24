@@ -3,17 +3,16 @@ import src.configs as C
 from src.helpers import count_oscillations, show_delay
 from collections import deque
 import pygame
+from src.xbox_controller import XboxController
 
 # --------- State ----------
 xs = deque(maxlen=C.WINDOW_SIZE)
 ys = deque(maxlen=C.WINDOW_SIZE)
 detected_gestures = set()
 nod_delay, shake_delay = (C.DETECT_DELAY,)*2
+gaze_delay = C.GAZE_DELAY
 
 # Load OpenCV's built-in Haar cascade for faces
-#face_cascade = cv2.CascadeClassifier(
-#    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
-#)
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 # Open webcam
@@ -27,10 +26,16 @@ print("[o] Running head movement detection. Press 'q' to quit.")
 pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
 pygame.mixer.init()
 
+# Initialize Xbox Controller for Haptic Feedback
+controller = XboxController(0)
+
 while True:
     ret, frame = cap.read()
     if not ret:
         break
+
+    # Xbox Controller Polling
+    controller.poll()
 
     # Flip for natural webcam view
     frame = cv2.flip(frame, 1)
@@ -44,10 +49,16 @@ while True:
         minSize=(80, 80),
     )
 
+    # Default status
     status_text = "No Gaze Detected"
-    status_color = C.COLOR_RED
+    status_color = C.COLORS['RED']
 
-    if len(faces) > 0:
+    if len(faces) > 0: # Face detected
+        status_text = "Detecting Gaze..."
+        status_color = C.COLORS["YELLOW"]
+        # Xbox Controller Rumble while face detected
+        controller.rumble(C.LEFT_VIBE, C.RIGHT_VIBE)
+        
         (x, y, w, h) = faces[0]
         cx = x + w // 2
         cy = y + h // 2
@@ -56,8 +67,8 @@ while True:
         ys.append(cy)
 
         # Draw bounding box and center
-        cv2.rectangle(frame, (x, y), (x + w, y + h), C.COLOR_YELLOW, 2)
-        cv2.circle(frame, (cx, cy), 4, C.COLOR_YELLOW, -1)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), C.COLORS["YELLOW"], 2)
+        cv2.circle(frame, (cx, cy), 4, C.COLORS["YELLOW"], -1)
 
         if len(xs) == C.WINDOW_SIZE:
             dx = max(xs) - min(xs)
@@ -66,42 +77,24 @@ while True:
             osc_x = count_oscillations(xs)
             osc_y = count_oscillations(ys)
 
-
-            # TODO: Do we want to add a cooldown after gaze is detected, to prevent false positives?
-            status_text = "Detecting Gaze..."
-            status_color = C.COLOR_YELLOW
             # Vertical → nod
-            if dy > C.NOD_THRESHOLD and dy > dx and osc_y >= C.MIN_OSCILLATIONS and nod_delay == C.DETECT_DELAY:
+            if dy > C.NOD_THRESHOLD and dy > dx and osc_y >= C.MIN_OSCILLATIONS and nod_delay == C.DETECT_DELAY and gaze_delay <= 0:
                 detected_gestures.add("NOD")
                 pygame.mixer.Sound(C.NOD_WAV).play()
             # Horizontal → shake
-            elif dx > C.SHAKE_THRESHOLD and dx > dy and osc_x >= C.MIN_OSCILLATIONS and shake_delay == C.DETECT_DELAY:
+            elif dx > C.SHAKE_THRESHOLD and dx > dy and osc_x >= C.MIN_OSCILLATIONS and shake_delay == C.DETECT_DELAY and gaze_delay <= 0:
                 detected_gestures.add("SHAKE")
                 pygame.mixer.Sound(C.SHAKE_WAV).play()
 
+        gaze_delay -= 1
+    else:
+        gaze_delay = C.GAZE_DELAY
+
     # Show status
-    cv2.putText(
-        frame,
-        status_text,
-        (350, 30),
-        C.FONT_TYPE,
-        1,
-        status_color,
-        2,
-        cv2.LINE_AA,
-    )
+    cv2.putText( frame, status_text, (350, 30), C.FONT_TYPE, 1, status_color, 2, cv2.LINE_AA)
 
 # ============================== DEBUG INFO ======================================
-    cv2.putText(
-        frame,
-        "Cues Detected:",
-        (10, 30),
-        C.FONT_TYPE,
-        1,
-        C.COLOR_BLUE,
-        2,
-        cv2.LINE_AA,
-        )
+    cv2.putText(frame, "Cues Detected:", (10, 30), C.FONT_TYPE, 1, C.COLORS["BLUE"], 2, cv2.LINE_AA)
 
 # ---------------- Nod delay handling ----------------
     if len(detected_gestures) > 0 and "NOD" in detected_gestures and nod_delay > 0:
