@@ -1,5 +1,5 @@
 import cv2
-import src.configs as C
+import config as C
 from src.helpers import count_oscillations, show_delay
 from collections import deque
 import pygame

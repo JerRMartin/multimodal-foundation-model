@@ -3,7 +3,7 @@ import time
 import torch
 import mediapipe as mp
 import numpy as np
-import src.configs as C
+import config as C
 from PIL import Image
 from torchvision import transforms
 from src.helpers import get_box

@@ -1,7 +1,7 @@
 import cv2
 import math
 import numpy as np
-import src.configs as C
+import config as C
 import threading
 
 # --------- Helpers ----------

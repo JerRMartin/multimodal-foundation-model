@@ -3,13 +3,13 @@ import cv2
 import simpleaudio as sa
 
 DICT_EMO = {
-    0: 'Neutral', 
-    1: 'Happiness', 
-    2: 'Sadness', 
-    3: 'Surprise', 
-    4: 'Fear', 
-    5: 'Disgust', 
-    6: 'Anger'
+    0: 'Neutral',
+    1: 'Happiness', # haptics
+    2: 'Sadness', # haptics
+    3: 'Surprise', # audio cues
+    4: 'Fear', # optional
+    5: 'Disgust', # optional
+    6: 'Anger' # audio cues
 }
 # ---- Colors ----
 COLORS = {
