@@ -1,6 +1,6 @@
 # configs.py
 import cv2
-import simpleaudio as sa
+#import simpleaudio as sa
 
 DICT_EMO = {
     0: 'Neutral',
