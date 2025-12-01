@@ -39,21 +39,6 @@ Example Output: *(Note the CUDA Version in the top-right)*
 |  No running processes found                                                             |
 ```
 
-## Project Tooling
-### [Transformers](https://huggingface.co/docs/transformers/installation#python)
-We are using the `transformers` python package to import a foundation model.
-
-#### [BLIP: Bootstrapping Language-Image Pre-training](https://huggingface.co/Salesforce/blip-image-captioning-base)
-
-`Salesforce blip-image-captioning-base` = foundation model we import.
-
-### [Datasets](https://huggingface.co/docs/datasets/index)
-
-### [PEFT (Parameter-Efficient Fine-Tuning)](https://github.com/huggingface/peft)
-
-### [Accelerate](https://huggingface.co/docs/accelerate/index)
-
-
 ## Running the Project
 ### 1. Create a virtual environment named `.venv` (safe local name) and activate it.
 
@@ -105,18 +90,14 @@ pip install -r requirements.txt
 python -m pytest -q
 ```
 
-## Running the Gesture Recognition
+## Running the Project
 
 ```bash
-set CONTROL=False && python -m src.gestures
+python -m src.main
 ```
-> Note the `CONTROL` environment variable, set this to `True` if you are using an Xbox Controller for Haptic Feedback.
-
-## Running the Emotion  Recognition
-
-```bash
-python -m src.emotions
-```
+> **Optional Flags/Command-line Argument**
+>
+> `--control` - include this flag if you are using an Xbox Controller for Haptic Feedback.
 
 ## License
 This repository is licensed under the Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0).
