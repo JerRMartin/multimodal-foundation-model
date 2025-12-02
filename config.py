@@ -7,6 +7,8 @@ DICT_EMO = {
     1: 'Happiness', # haptics
     2: 'Sadness', # haptics
     3: 'Surprise', # audio cues
+    4: 'Fear', # optional
+    5: 'Disgust', # optional
     6: 'Anger' # audio cues
 }
 # ---- Colors ----
@@ -31,7 +33,7 @@ GAZE_DELAY = 15           # seconds to wait BEFORE detecting gestures
 # --------- Configuration Thresholds ----------
 WINDOW_SIZE = 15          # regarding frames in history
 NOD_THRESHOLD = 7        # regarding vertical movement in pixels
-SHAKE_THRESHOLD = 2      # regarding horizontal movement in pixels
+SHAKE_THRESHOLD = 5      # regarding horizontal movement in pixels
 MIN_OSCILLATIONS = 3      # how many direction changes to call a gesture
 
 # ---- PyTorch Model Path ----
@@ -46,8 +48,8 @@ class _Clip():
 class AUDIO():
     NOD: _Clip = _Clip('audio/Nod.mp3', 0.25)
     SHAKE: _Clip = _Clip('audio/Shake.mp3', 0.35)
-    SURPRISE: _Clip = _Clip('audio/Surprise.mp3', 0.50)
-    ANGER: _Clip = _Clip('audio/Anger.mp3', 0.50)
+    SURPRISE: _Clip = _Clip('audio/Surprise.mp3', 0.35)
+    ANGER: _Clip = _Clip('audio/Anger.mp3', 0.35)
 
 # ------- Controller Constants -------
 LEFT_VIBE = 0.25
