@@ -1,8 +1,8 @@
 
-# Multimodal Foundation Model
-The goal of this project is to use foundation models from [huggingface](https://huggingface.co) to add and train additional small layers for computer vision recognition of a few Non-Verbal Cues (NVCs). 
+# Emotion and Gesture Assistive Tool
+The goal of this project is to create an assitive tool to help Blind or Low Vision (BLV) users to detect a few Non-Verbal Cues (NVCs) and emotion changes in one-on-one converstaions. 
 
-Additionally, to take this refined output and convert it to audio descriptions using a pre-trained tts model. 
+We use a webcam to mimic a users POV, and monitor the Field of view to detect individuals and play audio or haptic cues to alert the user of detected individuals NVCs happening in their vacinity.
 
 ## System Requirements
 ### CUDA Runtime
